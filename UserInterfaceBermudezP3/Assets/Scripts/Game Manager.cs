@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject titleScreen;
     public TextMeshProUGUI livesText;
     private int lives;
+    public GameObject pauseScreen;
+    private bool paused;
 
 
 
@@ -30,7 +32,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+     if(Input.GetKeyDown(KeyCode.P))
+        {
+            ChangePaused();
+        }
+        
+        
     }
     IEnumerator SpawnTarget()
     {
@@ -78,6 +85,22 @@ public class GameManager : MonoBehaviour
         if(lives <=0)
         {
             GameOver();
+        }
+    }
+    void ChangePaused()
+    {
+        if(!paused)
+        {
+            paused = true;
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0;
+
+        }
+       else
+        {
+            paused = false;
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 }
